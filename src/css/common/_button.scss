@@ -1,0 +1,14 @@
+@layer components {
+  .affluent-button {
+    @apply inline-block px-[26.5px] py-4 rounded-full text-base font-normal;
+    border-radius: 56px;
+    border: 1.5px solid
+      var(--SL-Primary-Button-Border, rgba(242, 227, 199, 0.15));
+    background: linear-gradient(
+      151deg,
+      rgba(224, 224, 224, 0.19) 0.84%,
+      rgba(255, 255, 255, 0) 109.48%
+    );
+    backdrop-filter: blur(32px);
+  }
+}

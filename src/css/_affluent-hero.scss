@@ -1,0 +1,8 @@
+@layer components {
+  .affluent-hero {
+    @apply mb-[180px];
+    img {
+      @apply w-full;
+    }
+  }
+}

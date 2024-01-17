@@ -1,0 +1,22 @@
+extends ./templates/_layout
+
+block variables
+  -
+    var appId = 'top';
+    var title = 'TOP PAGE';
+    var description = 'Description: This page is top page.';
+
+block content
+  include layouts/_header.pug
+  include components/_affluent-hero.pug
+  include components/_affluent-large-card.pug
+  //- include pages/_post__v1.pug
+  include components/_separator.pug
+  //- include pages/_post__v2.pug
+  //- include components/_separator.pug
+  //- include pages/_post__v3.pug
+  //- include components/_separator.pug
+  //- include pages/_post-listing.pug
+  //- include components/_separator.pug
+  //- include pages/_reserved.pug
+  include layouts/_footer.pug

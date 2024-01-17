@@ -1,0 +1,39 @@
+include ../components/common/button/_affluent-button.pug
+
+-
+  var appId = '';
+  var title = '';
+  var description = 'description';
+  var ogp = {
+    url: '',
+    image: '',
+    type: 'website',
+    siteName: ''
+  };
+
+block variables
+
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover')
+
+    title #{title}
+    meta(name='description', content=description)
+    meta(property='og:title', content=title)
+    meta(property='og:description', content=description)
+    meta(property='og:url', content=ogp.url)
+    meta(property='og:image', content=ogp.image)
+    meta(property='og:type', content=ogp.type)
+    meta(property='og:site_name', content=ogp.siteName)
+
+    link(rel='shortcut icon', href='/favicon.ico')
+    link(rel='stylesheet', href='./css/main.css')
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
+  body.theme-affluent(id=appId)
+    block content
+    script(src='./js/main.js')
