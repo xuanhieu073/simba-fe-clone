@@ -23,6 +23,10 @@ module.exports = {
         loader: "babel-loader",
       },
       {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
+      {
         test: /\.pug$/,
         use: [
           {
@@ -32,8 +36,20 @@ module.exports = {
           "extract-loader",
           {
             loader: "html-loader",
+            // options: {
+            //   attrs: ["img:src", ":data-src"],
+            // },
             options: {
-              attrs: ["img:src", ":data-src"],
+              sources: {
+                list: [
+                  {
+                    tag: "img",
+                    attribute: "src",
+                    type: "src",
+                  },
+                ],
+              },
+              esModule: false,
             },
           },
           {
@@ -51,8 +67,8 @@ module.exports = {
             loader: "file-loader",
             options: {
               name: "[name].[ext]",
-              outputPath: "static/",
-              publicPath: (url) => "./static/" + url,
+              outputPath: "assets/",
+              publicPath: (url) => "./assets/" + url,
             },
           },
         ],
@@ -60,6 +76,7 @@ module.exports = {
     ],
   },
   resolve: {
+    fallback: { url: false },
     extensions: [".js"],
     // alias: {
     //   static: path.resolve(__dirname, 'src/static'),

@@ -1,16 +1,16 @@
-const path = require('path');
-const merge = require('webpack-merge');
-const cssnano = require('cssnano');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require("path");
+const { merge } = require("webpack-merge");
+const cssnano = require("cssnano");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const baseConfig = require('./webpack.config.base.js');
+const baseConfig = require("./webpack.config.base.js");
 const config = merge(baseConfig, {
-  mode: 'production',
+  mode: "production",
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'css/[name].css'
-    })
-  ]
+      filename: "css/[name].css",
+    }),
+  ],
 });
 
 config.module.rules.push({
@@ -19,28 +19,27 @@ config.module.rules.push({
     // CSSをextractする
     MiniCssExtractPlugin.loader,
     {
-      loader: 'css-loader',
+      loader: "css-loader",
       options: {
         // 0 => no loaders (default);
         // 1 => postcss-loader;
         // 2 => postcss-loader, sass-loader
-        importLoaders: 2
-      }
+        importLoaders: 2,
+      },
     },
     {
-      loader: 'postcss-loader',
+      loader: "postcss-loader",
       options: {
-        ident: 'postcss',
-        plugins: [
-          require('tailwindcss')('./tailwind.config.js'),
-          cssnano()
-        ]
-      }
+        postcssOptions: {
+          ident: "postcss",
+          plugins: [require("tailwindcss")("./tailwind.config.js"), cssnano()],
+        },
+      },
     },
     {
-      loader: 'sass-loader'
+      loader: "sass-loader",
     },
-  ]
+  ],
 });
 
 module.exports = config;

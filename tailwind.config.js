@@ -22,6 +22,7 @@ module.exports = {
     },
     fontFamily: {
       sharpsans: "SharpSansDispNo1, Helvetica, sans-serif",
+      sourcesans3: 'Source Sans 3, sans-serif',
     },
     fontWeight: {
       black: 900,

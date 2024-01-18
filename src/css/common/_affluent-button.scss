@@ -1,6 +1,6 @@
 @layer components {
   .affluent-button {
-    @apply inline-block px-[26.5px] py-4 rounded-full text-base font-normal;
+    @apply inline-block px-[10px] tablet:px-[26.5px] py-[13.5px] tablet:py-4 rounded-full text-[12px] tablet:text-base font-normal;
     border-radius: 56px;
     border: 1.5px solid
       var(--SL-Primary-Button-Border, rgba(242, 227, 199, 0.15));

@@ -31,8 +31,10 @@ document.addEventListener("alpine:init", () => {
       this.menuShow = !this.menuShow;
       if (this.menuShow) {
         this.$refs.menu.style.setProperty("--d", "block");
+        this.$refs.layout.style.setProperty("--h", "100vh");
       } else {
         this.$refs.menu.style.setProperty("--d", "none");
+        this.$refs.layout.style.setProperty("--h", "auto");
       }
     },
   }));

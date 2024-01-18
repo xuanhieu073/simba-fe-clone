@@ -1,19 +1,21 @@
 @layer components {
   .affluent-header {
     &_container {
+      --p: relative;
       position: var(--p);
-      @apply left-0 right-0 w-screen z-10 top-0 text-white flex h-[88px] bg-sl-affluent-red;
-      // @apply tablet:relative;
-      @media screen and (max-width: 960.98px) {
-      }
+      @apply left-0 right-0 w-screen z-10 top-0 text-white flex bg-sl-affluent-red;
     }
     &_reserve {
-      @apply tablet:hidden;
+      @apply w-full;
       height: var(--h);
     }
+    &_logo {
+      @apply h-[34px] tablet:h-12;
+    }
     &_branding {
-      @apply absolute w-4 left-0 top-0 bottom-0 bg-white;
-      @apply tablet:w-12;
+      grid-area: brand;
+      @apply relative w-4 h-[calc(100%+32px)] bg-white;
+      @apply tablet:absolute tablet:left-0 tablet:top-0 tablet:bottom-0 tablet:w-12 tablet:h-auto;
       &:before {
         content: "";
         @apply absolute w-2 left-0 top-0 bottom-0 bg-sl-affluent-beige;
@@ -26,18 +28,15 @@
       }
     }
     &_layout {
-      @apply grid items-center justify-between py-4 gap-y-4 w-full h-screen;
+      @apply grid items-center justify-between py-4 w-full;
       @apply tablet:static tablet:max-w-[1200px] tablet:mx-auto tablet:flex tablet:h-auto tablet:w-full tablet:pl-12;
       @media screen and (max-width: 960.98px) {
+        height: var(--h);
         grid-template-rows: auto 1fr;
         grid-template-columns: 16px 1fr auto;
         grid-template-areas:
           "brand logo cta"
           "menu menu menu";
-      }
-      &:before {
-        content: "";
-        grid-area: brand;
       }
     }
     &_start {
@@ -48,7 +47,7 @@
       @apply tablet:hidden;
     }
     &_center {
-      @apply justify-center pt-6 pl-6 pr-4 bg-sl-affluent-red h-full;
+      @apply justify-center pt-12 pl-6 pr-4 bg-sl-affluent-red h-full;
       @apply tablet:static tablet:ml-auto tablet:mr-[min(4vw,64px)] tablet:p-0 tablet:h-auto;
       grid-area: menu;
       @media screen and (max-width: 960.98px) {
@@ -63,9 +62,9 @@
       grid-area: cta;
       @apply flex flex-col gap-y-8;
       @apply tablet:inline-flex tablet:flex-row tablet:gap-[min(3vw,48px)];
-      li {
+      &-link {
         @apply flex justify-between cursor-pointer;
-        svg {
+        img {
           @apply tablet:hidden;
         }
       }
