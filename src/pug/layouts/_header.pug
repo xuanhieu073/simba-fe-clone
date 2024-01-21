@@ -6,27 +6,27 @@ nav.affluent-header(x-data="affluentheader")
       .affluent-header_start
         button.affluent-header_menu-ctrl(@click="toggleShowMenu()")
           .hide(x-show="menuShow")
-            img(src=path+"icons/affluent-menu-open.svg", alt="affluent-menu-open")
+            img(src=path+"icons/affluent/affluent-menu-open.svg", alt="affluent-menu-open")
           .show(x-show="!menuShow")
-            img(src=path+"icons/affluent-menu-close.svg", alt="affluent-menu-close")
-        img.affluent-header_logo(src=path+"images/affluent-logo.png", alt="")
+            img(src=path+"icons/affluent/affluent-menu-close.svg", alt="affluent-menu-close")
+        img.affluent-header_logo(src=path+"images/affluent/affluent-logo.png", alt="")
       .affluent-header_center(x-ref="menu")
         ul.affluent-header_menu
           li
             a.affluent-header_menu-link(href="#")
               p Our Products
-              img(src=path+"icons/affluent-chevron-right.svg", alt="", srcset="")
+              img(src=path+"icons/affluent/affluent-chevron-right.svg", alt="", srcset="")
           li
             a.affluent-header_menu-link(href="#")
               p Promotion 
-              img(src=path+"icons/affluent-chevron-right.svg", alt="", srcset="")
+              img(src=path+"icons/affluent/affluent-chevron-right.svg", alt="", srcset="")
           li
             a.affluent-header_menu-link(href="#")
               p Our Team 
-              img(src=path+"icons/affluent-chevron-right.svg", alt="", srcset="")
+              img(src=path+"icons/affluent/affluent-chevron-right.svg", alt="", srcset="")
           li
             a.affluent-header_menu-link(href="#")
               p Contact Us
-              img(src=path+"icons/affluent-chevron-right.svg", alt="", srcset="")
+              img(src=path+"icons/affluent/affluent-chevron-right.svg", alt="", srcset="")
       .affluent-header_end
         a(href="#").affluent-button Connect with Us

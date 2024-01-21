@@ -1,14 +1,15 @@
 @import "~reset-css";
 @import "color";
 
+@import "tailwindcss/base";
+@import "tailwindcss/utilities";
+@import "tailwindcss/components";
+
 @import "./common/_affluent-button.scss";
 @import "./affluent-header.scss";
 @import "./affluent-hero.scss";
 @import "./affluent-large-card";
-
-@import "tailwindcss/base";
-@import "tailwindcss/utilities";
-@import "tailwindcss/components";
+@import "./affluent-standfirst";
 
 body.theme-affluent {
   font-family: "Inter", sans-serif;

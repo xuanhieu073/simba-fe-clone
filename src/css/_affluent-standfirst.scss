@@ -1,0 +1,23 @@
+@layer utilities {
+  .affluent-standfirst {
+    @apply mb-[158px];
+    &_header {
+      @apply text-card-header-h1 mb-4 text-center font-light;
+      b {
+        @apply font-semibold;
+      }
+    }
+    &_subheader {
+      @apply text-base font-normal mb-16 text-center opacity-70;
+    }
+    &_list {
+      @apply grid grid-cols-4 gap-x-6;
+    }
+    &_card {
+      @apply flex flex-col gap-y-4 items-center;
+      &-desc {
+        @apply text-center;
+      }
+    }
+  }
+}

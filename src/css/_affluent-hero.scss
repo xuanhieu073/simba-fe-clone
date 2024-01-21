@@ -1,8 +1,25 @@
 @layer components {
   .affluent-hero {
-    @apply mb-[180px];
-    img {
-      @apply w-full;
+    @apply relative mb-[180px];
+    // &_bg {
+    //   @apply absolute inset-0;
+    //   img {
+    //     @apply w-full h-full object-cover;
+    //   }
+    // }
+    &_bg {
+      img {
+        @apply w-full;
+      }
+    }
+    &_content {
+      @apply absolute top-10 tablet:top-[100px] left-[120px] font-sourcesans3 text-black;
+    }
+    &_title {
+      @apply text-[24px] tablet:text-hero-banner;
+    }
+    &_desc {
+      @apply text-[14px] tablet:text-base;
     }
   }
 }
