@@ -29,8 +29,13 @@
     }
     &_layout {
       @apply grid items-center justify-between py-4 w-full;
-      @apply tablet:static tablet:max-w-[1200px] tablet:mx-auto tablet:flex tablet:h-auto tablet:w-full tablet:pl-12;
+      @apply tablet:static tablet:max-w-[1200px] tablet:mx-auto tablet:flex tablet:h-auto tablet:w-full;
+      @media screen and (max-width: 1288px) {
+        margin-left: 48px;
+      }
       @media screen and (max-width: 960.98px) {
+        padding-right: 24px;
+        margin-left: 0;
         height: var(--h);
         grid-template-rows: auto 1fr;
         grid-template-columns: 16px 1fr auto;

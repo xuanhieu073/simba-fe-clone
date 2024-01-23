@@ -1,16 +1,9 @@
-mixin affluent-standfirst-card(iconpath, desc)
-  a(href="#").affluent-standfirst_card
-    img(src=path+iconpath, alt="affluent-standfirst")
-    p.affluent-standfirst_card-desc=desc
-
 mixin affluent-standfirst
-  .affluent-standfirst
-    h3.affluent-standfirst_header 
-      b Secure Your Tomorrow 
-      | with Confidence
-    h4.affluent-standfirst_subheader Experience personalised financial solutions at every milestone. Trust us to:
-    .affluent-standfirst_list
-      +affluent-standfirst-card("icons/affluent/affluent-heart.svg", "Protect your loved ones and enjoy peace of mind")
-      +affluent-standfirst-card("icons/affluent/affluent-chart.svg", "Grow and accumulate your wealth strategically")
-      +affluent-standfirst-card("icons/affluent/affluent-shield.svg", "Tailor solutions for a secure financial future")
-      +affluent-standfirst-card("icons/affluent/affluent-satchel.svg", "Plan an impactful and meaningful legacy that lasts")
+  .affluent-standfirst(style="--mobile-mb: 32px; --desktop-mb: 64px")
+    .affluent-standfist_title
+      h3.affluent-standfirst_header 
+        b Secure Your Tomorrow 
+        | with Confidence
+      h4.affluent-standfirst_subheader Experience personalised financial solutions at every milestone. Trust us to:
+    .affluent-standfirst_cta
+      a.affluent-button_primary Grow together now

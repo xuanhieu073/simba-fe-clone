@@ -47,6 +47,11 @@ module.exports = {
                     attribute: "src",
                     type: "src",
                   },
+                  {
+                    tag: "img",
+                    attribute: "lazy-src",
+                    type: "src",
+                  },
                 ],
               },
               esModule: false,

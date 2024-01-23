@@ -8,10 +8,15 @@
 @import "./common/_affluent-button.scss";
 @import "./affluent-header.scss";
 @import "./affluent-hero.scss";
-@import "./affluent-large-card";
 @import "./affluent-standfirst";
+@import "./affluent-card.scss";
+@import "./affluent-background";
 
 body.theme-affluent {
   font-family: "Inter", sans-serif;
-  @apply bg-sl-affluent-red text-white;
+  @apply relative bg-[#30050D] text-white;
+}
+
+.affluent-container {
+  @apply max-w-[996px] mx-auto px-6 tablet:px-0;
 }

@@ -1,10 +1,7 @@
 import "./pugImport";
-import "../css/base.scss";
-import "@fortawesome/fontawesome-free/js/fontawesome";
-import "@fortawesome/fontawesome-free/js/solid";
-import "@fortawesome/fontawesome-free/js/regular";
-import "@fortawesome/fontawesome-free/js/brands";
+import "../css/index.scss";
 import "./affluent-header";
+import "./lazy-load-image";
 // import Swiper JS
 import Swiper from "swiper";
 // import Swiper styles

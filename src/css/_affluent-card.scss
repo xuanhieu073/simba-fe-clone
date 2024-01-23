@@ -1,0 +1,78 @@
+@layer components {
+  .affluent-card {
+    &_large {
+      @apply mb-[length:var(--mobile-mb)] mobile:mb-[length:var(--desktop-mb)];
+      @apply rounded-2xl flex flex-col mobile:flex-row items-center mobile:items-stretch overflow-hidden;
+      border: 1px solid
+        var(--SL-Primary-Button-Border, rgba(242, 227, 199, 0.15));
+      background: var(
+        --SL-Primary-Button-Linear,
+        linear-gradient(
+          151deg,
+          rgba(224, 224, 224, 0.19) 0.84%,
+          rgba(255, 255, 255, 0) 109.48%
+        )
+      );
+      .affluent-button_primary {
+        @apply px-[34.5px];
+      }
+    }
+    &_with-image {
+      @apply flex flex-col items-start gap-0 px-4 pt-8 pb-6 mobile:py-10 mobile:pl-10 mobile:pr-[54px] flex-1;
+    }
+    &_eyebrow {
+      @apply inline-block px-2 py-1 mobile:px-4 mobile:py-2 text-black rounded-full bg-sl-affluent-beige font-normal text-[12px] mobile:text-[16px] mb-8 mobile:mb-8;
+      b {
+        @apply font-semibold;
+      }
+    }
+    &_content {
+      @apply mb-6 mobile:mb-8;
+    }
+    &_header {
+      @apply flex flex-col gap-2 mobile:gap-4 pb-4;
+    }
+    &_title {
+      @apply text-[18px] mobile:text-[28px] leading-[30px] font-light;
+      b {
+        @apply font-medium;
+      }
+    }
+    &_desc {
+      @apply text-[14px] mobile:text-[16px] leading-[1.5] text-white/70 font-normal;
+    }
+    &_list {
+      @apply pt-6 flex flex-col gap-6 border-solid border-t border-white/20;
+    }
+    &_item {
+      @apply flex gap-3;
+      p {
+        @apply text-[14px] mobile:text-base leading-[19px] mobile:leading-[30px] tracking-[0.2px]; 
+      }
+      img {
+        @apply w-4 mobile:w-[21px];
+      }
+    }
+    &_cta {
+      @apply flex gap-6 items-center;
+    }
+    &_img {
+      @apply flex-shrink-0 mobile:mt-auto mobile:-mr-6 min-w-6 min-h-6;
+    }
+
+    //icon card
+    &_icon-list {
+      @apply mb-[length:var(--mobile-mb)] mobile:mb-[length:var(--desktop-mb)];
+      @apply grid grid-cols-1 mobile:grid-cols-4 gap-x-6 gap-y-10;
+    }
+    &_icon {
+      @apply flex flex-col gap-y-4 items-center w-[187px] mobile:w-auto justify-self-center;
+      &-img {
+        @apply w-[42px] mobile:w-[64px];
+      }
+      &-desc {
+        @apply text-[14px] mobile:text-[18px] leading-[1.2] text-center;
+      }
+    }
+  }
+}
