@@ -1,9 +1,7 @@
-mixin affluent-standfirst
+mixin affluent-standfirst(header, subheader)
   .affluent-standfirst(style="--mobile-mb: 32px; --desktop-mb: 64px")
-    .affluent-standfist_title
-      h3.affluent-standfirst_header 
-        b Secure Your Tomorrow 
-        | with Confidence
-      h4.affluent-standfirst_subheader Experience personalised financial solutions at every milestone. Trust us to:
+    .affluent-standfist_title 
+      h3.affluent-standfirst_header !{header}
+      h4.affluent-standfirst_subheader !{subheader}
     .affluent-standfirst_cta
-      a.affluent-button_primary Grow together now
+      a.affluent-button_primary Grow together now 

@@ -144,6 +144,7 @@ module.exports = {
           beige: {
             DEFAULT: "#EDDEC2",
             100: "#CAA97C",
+            200: "#CFAE7C",
           },
           primary: {
             button: "#F2E3C7",

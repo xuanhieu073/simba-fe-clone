@@ -1,8 +1,9 @@
 @layer components {
+  .margin-option {
+    @apply mb-[length:var(--mobile-mb)] mobile:mb-[length:var(--desktop-mb)];
+  }
   .affluent-card {
-    &_large {
-      @apply mb-[length:var(--mobile-mb)] mobile:mb-[length:var(--desktop-mb)];
-      @apply rounded-2xl flex flex-col mobile:flex-row items-center mobile:items-stretch overflow-hidden;
+    &_bg {
       border: 1px solid
         var(--SL-Primary-Button-Border, rgba(242, 227, 199, 0.15));
       background: var(
@@ -13,8 +14,17 @@
           rgba(255, 255, 255, 0) 109.48%
         )
       );
+    }
+    &_large {
+      @apply rounded-2xl flex flex-col mobile:flex-row items-center mobile:items-stretch overflow-hidden;
       .affluent-button_primary {
         @apply px-[34.5px];
+      }
+      &.reverse {
+        @apply mobile:flex-row-reverse;
+        .affluent-card_img {
+          @apply mobile:mr-0 mobile:-ml-6
+        }
       }
     }
     &_with-image {
@@ -60,9 +70,39 @@
       @apply flex-shrink-0 mobile:mt-auto mobile:-mr-6 min-w-6 min-h-6;
     }
 
+    //medium card
+    &_medium {
+      @apply flex flex-col rounded-2xl px-8 py-10;
+      .affluent-card_eyebrow {
+        @apply bg-transparent text-grey-300/70 text-[14px] leading-[30px] font-normal p-0 mb-2;
+      }
+      &-title {
+        @apply relative text-[20px] leading-[30px] text-sl-affluent-beige-200 font-normal;
+      }
+      &-desc {
+        @apply relative text-[13px] leading-[21px] font-normal text-white/70;
+      }
+      .textctn {
+        @apply static mobile:absolute top-0 left-0;
+      }
+      .reservespc {
+        @apply hidden mobile:block opacity-0;
+      }
+      .affluent-card_item {
+        p {
+          @apply text-[16px] leading-[21px];
+        }
+        img {
+          @apply w-4;
+        }
+      }
+      .affluent-card_cta {
+        @apply mt-auto;
+      }
+    }
+
     //icon card
     &_icon-list {
-      @apply mb-[length:var(--mobile-mb)] mobile:mb-[length:var(--desktop-mb)];
       @apply grid grid-cols-1 mobile:grid-cols-4 gap-x-6 gap-y-10;
     }
     &_icon {
@@ -74,5 +114,9 @@
         @apply text-[14px] mobile:text-[18px] leading-[1.2] text-center;
       }
     }
+  }
+
+  .affluent-products {
+    @apply grid grid-cols-1 mobile:grid-cols-2 gap-x-6 gap-y-12;
   }
 }

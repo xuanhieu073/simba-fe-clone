@@ -11,8 +11,10 @@ block content
   include layouts/_header.pug
   include components/_affluent-hero.pug
   .affluent-container
-    +affluent-standfirst
+    +affluent-standfirst("<b>Secure Your Tomorrow</b> with Confidence", "Experience personalised financial solutions at every milestone. Trust us to:")
     +affluent-card_icon-list
     +affluent-card-large
-    include components/_separator.pug
+    +affluent-standfirst("Our Suite of <b>Personalised Solutions</b>", "Rely on our curated solutions to ensure a secure financial future for both you and your loved ones.")
+    +affluent-cards-medium
+    +affluent-standfirst("<b>Grow</b> with Singlife", "Grow together, grow with you, <a href='#'>grow with me.</a>")
   include layouts/_footer.pug

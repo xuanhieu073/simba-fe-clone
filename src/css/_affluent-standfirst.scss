@@ -6,9 +6,15 @@
       b {
         @apply font-semibold;
       }
+      a {
+        @apply text-sl-affluent-beige;
+      }
     }
     &_subheader {
-      @apply text-[14px] tablet:text-base font-normal text-center opacity-70;
+      @apply text-[14px] tablet:text-base font-normal text-center text-white/70;
+      a {
+        @apply text-sl-affluent-beige;
+      }
     }
     &_cta {
       @apply flex items-center justify-center mt-6 mobile:mt-12;
