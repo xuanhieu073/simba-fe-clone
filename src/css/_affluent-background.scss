@@ -2,7 +2,7 @@
   .affluent-background {
     @apply absolute inset-0 -z-50 overflow-hidden;
     &_top-left {
-      @apply absolute top-0 mobile:-top-[100px] left-0 opacity-30 min-h-[161px] min-w-1 w-[200px] mobile:w-auto;
+      @apply absolute top-0 mobile:-top-[100px] left-0 opacity-30 min-h-[161px] mobile:min-h-[700px] min-w-[1px] w-[200px] mobile:w-auto;
     }
     &_middle-right {
       @apply absolute top-[1985px] right-0 opacity-30 w-[250px] mobile:w-auto;

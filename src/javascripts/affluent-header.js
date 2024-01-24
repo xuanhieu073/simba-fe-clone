@@ -32,9 +32,11 @@ document.addEventListener("alpine:init", () => {
       if (this.menuShow) {
         this.$refs.menu.style.setProperty("--d", "block");
         this.$refs.layout.style.setProperty("--h", "100vh");
+        document.body.style.overflow = "hidden";
       } else {
         this.$refs.menu.style.setProperty("--d", "none");
         this.$refs.layout.style.setProperty("--h", "auto");
+        document.body.style.overflow = null;
       }
     },
   }));
