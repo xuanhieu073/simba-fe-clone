@@ -4,30 +4,25 @@ mixin affluent-card-icon(iconpath, desc)
     p.affluent-card_icon-desc=desc
 
 mixin affluent-card_icon-list
-  .affluent-card_icon-list.margin-option(style="--mobile-mb: 80px; --desktop-mb: 158px")
+  .affluent-card_icon-list(x-data="affluent_leadinsection")
     +affluent-card-icon("assets/icons/affluent/affluent-heart.svg", "Protect your loved ones and enjoy peace of mind")
     +affluent-card-icon("assets/icons/affluent/affluent-chart.svg", "Grow and accumulate your wealth strategically")
     +affluent-card-icon("assets/icons/affluent/affluent-shield.svg", "Tailor solutions for a secure financial future")
     +affluent-card-icon("assets/icons/affluent/affluent-satchel.svg", "Plan an impactful and meaningful legacy that lasts")
 
-mixin affluent-card-large
-  .affluent-card_large.affluent-card_bg.margin-option.reverse(style="--mobile-mb: 80px; --desktop-mb: 252px")
+mixin affluent-card-large(title, desc, listItems)
+  .affluent-card_large.affluent-card_bg.reverse
     .affluent-card_with-image
       .affluent-card_eyebrow <b>TAILORED</b> FOR YOU
       .affluent-card_content 
         .affluent-card_header
-          h4.affluent-card_title Singlife Legacy <b>Indexed Universal Life</b>
-          p.affluent-card_desc Your legacy is more than just assets – it’s the impact you leave behind. Let us help you craft a legacy plan that ensures your values and achievements truly last.
+          h4.affluent-card_title !{title}
+          h4.affluent-card_desc !{desc}
         ul.affluent-card_list 
-          li.affluent-card_item 
-            img(src=path+"assets/icons/affluent/affluent-tick-circle.svg", alt="affluent-item-mark-icon")
-            p Grow your money while staying protected
-          li.affluent-card_item 
-            img(src=path+"assets/icons/affluent/affluent-tick-circle.svg", alt="affluent-item-mark-icon")
-            p Grow your money while staying protected
-          li.affluent-card_item 
-            img(src=path+"assets/icons/affluent/affluent-tick-circle.svg", alt="affluent-item-mark-icon")
-            p Grow your money while staying protected
+          each item in listItems
+            li.affluent-card_item 
+              img(src=path+"assets/icons/affluent/affluent-tick-circle.svg", alt="affluent-item-mark-icon")
+              p=item
       .affluent-card_cta 
         a.affluent-button_primary Discover more
         a.affluent-button_link.underline Lorem ipsum
@@ -43,7 +38,7 @@ mixin affluent-card-medium(eyebrow, title, desc, listItems)
           .reservespc=title
         .affluent-card_medium-desc
           p.textctn=desc
-          .reservespc=desc
+          .reservespc Enjoy yearly payouts, a money-back guarantee and more earnings over time.
       ul.affluent-card_list 
         each item in listItems
           li.affluent-card_item 
@@ -52,7 +47,12 @@ mixin affluent-card-medium(eyebrow, title, desc, listItems)
     .affluent-card_cta 
       a.affluent-button_primary Discover more
 
-mixin affluent-cards-medium 
-  .affluent-products.margin-option(style="--mobile-mb: 80px; --desktop-mb: 252px")
-    +affluent-card-medium("RETIREMENT PLANNING", "Singlife Flexi-Retirement II", "Approach your retirement years with confidence and freedom.", ["Tailor how you’d want your Guaranteed Monthly Income", "100% Capital Guaranteed", "Flexibility to reinvest your monthly payouts"])
-    +affluent-card-medium("RETIREMENT PLANNING", "Singlife Flexi Life Income II", "Enjoy yearly payouts, a money-back guarantee and more earnings over time.",["Enjoy yearly cash payouts without working","100% Capital Guaranteed","Be financially protected against Death and Terminal Illness"])
+mixin affluent-card-image(title, image)
+  .affluent-card_image.affluent-card_bg 
+    .affluent-card_image-container 
+      img(lazy-src=path + image, alt="affluent-article-image")
+    .affluent-card_image-content
+      .affluent-card_image-title=title
+      a(href="#").affluent-card_image-readmore
+        p Read 
+        img(src=path+"assets/icons/affluent/affluent-arrow-right.svg", alt="article-readmore-icon")

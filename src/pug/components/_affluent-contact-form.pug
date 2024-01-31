@@ -1,0 +1,30 @@
+mixin media-enquiries-dropdown(dropdownList = [{value:'Journalist', label:'Journalist'}, {value:'Customer', label:'Customer'}])
+  .media-enquiries-dropdown-container(x-data=`{showDropdown: false, dropdownList: ${JSON.stringify(dropdownList)}, value: null}`)
+    input(type='hidden' :value="value?.value || ''" @input="inputValidation(fieldName)")&attributes(attributes)
+    .media-enquiries-dropdown-select(@Click="showDropdown = !showDropdown")
+      p(x-text=`value ? value.label : 'Please Select'` :class="{ 'placeholder': !value }")
+      img.media-enquiries-dropdown-icon(src=path+"assets/icons/affluent-chevron-down.svg" :class="showDropdown && 'opened'")
+    .media-enquiries-dropdown-list(x-show="showDropdown")
+      template(x-for="item in dropdownList" :key="item.value")
+        span.media-enquiries-dropdown-item(@click=`value = item; showDropdown = false` :class="value?.value !== item.value || 'checked'" x-text="item.label")
+
+mixin affluent-contact-form
+  .affluent-contact-form
+    .affluent-contact-form_header
+      h2 Ready to take <b>the next step?</b>
+      p Connect with us today and let's start building your financial future together. 
+      | <br/>
+      | <br/>
+      | If you’d like to speak to someone, you can call us at <b>+65 6827 9933 (Mon – Fri, 8.45am to 5.30pm).</b>
+    .affluent-contact-form_form
+      .affluent-contact-form_form-control
+        label Area of Interest 
+        +media-enquiries-dropdown([{value:'1-10', label:'1-10'}, {value:'11-50', label:'11-50'}, {value: '51-100', label: '51-100'}, {value: 'more-than-100', label: 'More than 100'}])
+      .affluent-contact-form_form-control
+        label Name
+        input(id="aoi")
+      .affluent-contact-form_form-control
+        label Contact Number
+        input(id="aoi")
+      p.affluent-contact-form_note By clicking "Submit", you consent to Singapore Life Ltd. (“Singlife”) and Singlife related group of companies contacting you to provide you with information concerning Singlife and Singlife related group of companies' products and services. You also consent to Singlife using, disclosing or transferring your personal data in this form to Singlife related group of companies, third party providers or intermediaries, whether located in Singapore or elsewhere, for the above purposes and for research, audit, regulatory and compliance purposes. For details of Singlife's Data Protection Notice, please refer to <a href="#">singlife.com/pdpa.</a> To withdraw your consent at any time, please call Singlife at +65 6827 9933.
+      button.affluent-button_primary.affluent-contact-form_submit(type="submit") Submit

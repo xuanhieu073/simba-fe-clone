@@ -1,13 +1,13 @@
 import "./pugImport";
 import "../css/index.scss";
-import "./affluent-header";
-import "./lazy-load-image";
-// import Swiper JS
-import Swiper from "swiper";
-// import Swiper styles
-import "swiper/css";
 
-const swiper = new Swiper();
+import "./init-lazy";
+import "./lazy-load-image";
+import "./affluent-header";
+import "./affluent-products-grid";
+import "./affluent-hero";
+import "./affluent-leadin-section";
+
 if (module.hot) {
   module.hot.accept(console.error);
   module.hot.dispose(() => {

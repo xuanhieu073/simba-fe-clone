@@ -1,19 +1,22 @@
 @layer utilities {
   .affluent-standfirst {
-    @apply mb-[length:var(--mobile-mb)] mobile:mb-[length:var(--desktop-mb)];
     &_header {
-      @apply text-[18px] mobile:text-card-header-h1 mb-4 text-center font-light;
-      b {
-        @apply font-semibold;
-      }
-      a {
-        @apply text-sl-affluent-beige;
+      P {
+        @apply text-[18px] mobile:text-card-header-h1 mb-4 text-center font-light underline-offset-[3px];
+        b {
+          @apply font-semibold;
+        }
+        a {
+          @apply text-inherit underline;
+        }
       }
     }
     &_subheader {
-      @apply text-[14px] tablet:text-base font-normal text-center text-white/70;
-      a {
-        @apply text-sl-affluent-beige;
+      p {
+        @apply text-[14px] tablet:text-base font-normal text-center text-white/70 underline-offset-[3px];
+        a {
+          @apply text-inherit underline;
+        }
       }
     }
     &_cta {
@@ -21,6 +24,9 @@
       .affluent-button_primary {
         @apply px-4;
       }
+    }
+    .text-beige {
+      @apply text-sl-affluent-beige underline-offset-[4px];
     }
   }
 }
