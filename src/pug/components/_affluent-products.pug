@@ -6,5 +6,5 @@ mixin affluent-products
       +affluent-card-medium("WEALTH ACCUMULATION", "Singlife Elite Term", "Your choice of cover duration", ["Your choice of cover duration","Provide your loved ones with a lump-sum payout upon death or terminal illness","Flexibility to increase your basic cover without underwriting"])
       +affluent-card-medium("WEALTH ACCUMULATION", "Singlife Savvy Invest", "Ignite your financial growth with strategies that match your ambitions. ", ["Flexibility to choose from multiple funds", "Increase your investment any time", "Pass it on to your family as a legacy gift"])
       +affluent-card-medium("WEALTH ACCUMULATION", "Singlife Savvy Invest", "Ignite your financial growth with strategies that match your ambitions. ", ["Flexibility to choose from multiple funds", "Increase your investment any time", "Pass it on to your family as a legacy gift"])
-    .affluent-products_loadmore 
+    .affluent-products_loadmore(x-ref="loadMore")
       button(@click="toggleShowAll()" x-text="showAll ? 'Load less' : 'Load more'")

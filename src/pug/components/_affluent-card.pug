@@ -26,7 +26,8 @@ mixin affluent-card-large(title, desc, listItems)
       .affluent-card_cta 
         a.affluent-button_primary Discover more
         a.affluent-button_link.underline Lorem ipsum
-    img.affluent-card_img(lazy-src=path+"assets/images/affluent/affluent-card-image-small.png", alt="")
+    .affluent-card_img-container
+      img.affluent-card_img(lazy-src=path+"assets/images/affluent/affluent-card-image-small.png", alt="")
 
 mixin affluent-card-medium(eyebrow, title, desc, listItems)
   .affluent-card_medium.affluent-card_bg

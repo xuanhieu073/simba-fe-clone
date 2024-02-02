@@ -7,6 +7,9 @@ document.addEventListener("alpine:init", () => {
       for(let i = 4; i < this.productCards.length; i++) {
         this.productCards[i].style.display = "none";
       }
+      if(this.productCards.length <= 4) {
+        this.$refs.loadMore.style.setProperty('display', 'none');
+      }
     },
     toggleShowAll() {
       if(this.showAll) {

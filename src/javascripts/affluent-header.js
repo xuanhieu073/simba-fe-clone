@@ -1,10 +1,14 @@
 document.addEventListener("alpine:init", () => {
   Alpine.data("affluentheader", () => ({
     menuShow: false,
-    init() {
+    async init() {
       const _this = this;
       const root = this.$root;
-      const observer = new IntersectionObserver(
+      const menuLength = root.querySelectorAll('.affluent-header_menu li').length;
+      if(menuLength == 0) {
+        _this.$refs.menuIcon.style.setProperty('visibility', 'hidden');
+      }
+      const observerHeader = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             const percentageVisible = entry.intersectionRatio * 100;
@@ -25,7 +29,8 @@ document.addEventListener("alpine:init", () => {
           threshold: [0, 1],
         }
       );
-      observer.observe(root);
+      await this.$nextTick();
+      observerHeader.observe(root);
     },
     toggleShowMenu() {
       this.menuShow = !this.menuShow;

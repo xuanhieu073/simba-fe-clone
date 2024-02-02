@@ -22,6 +22,9 @@
       }
       &.reverse {
         @apply mobile:flex-row-reverse;
+        .affluent-card_img-container {
+          @apply flex mobile:w-[42%] tablet:w-[30.5%];
+        }
         .affluent-card_img {
           @apply mobile:mr-0 mobile:-ml-6
         }
@@ -31,7 +34,7 @@
       @apply flex flex-col items-start gap-0 px-4 pt-8 pb-6 mobile:py-10 mobile:pl-10 mobile:pr-[54px] flex-1;
     }
     &_eyebrow {
-      @apply inline-block px-2 py-1 mobile:px-4 mobile:py-2 text-black rounded-full bg-sl-affluent-beige font-normal text-[12px] mobile:text-[16px] mb-8 mobile:mb-8;
+      @apply inline-block px-2 py-1 mobile:px-4 mobile:py-2 text-black rounded-full bg-sl-affluent-beige-100 font-normal text-[12px] mobile:text-[16px] mb-4 mobile:mb-8;
       b {
         @apply font-semibold;
       }
@@ -56,15 +59,15 @@
       }
     }
     &_list {
-      @apply pt-6 flex flex-col gap-6 border-solid border-t border-white/20;
+      @apply pt-6 flex flex-col gap-4 mobile:gap-6 border-solid border-t border-white/20;
     }
     &_item {
       @apply flex gap-3 items-start;
       p {
-        @apply text-[14px] mobile:text-base leading-[19px] mobile:leading-[30px] tracking-[0.2px]; 
+        @apply text-[14px] text-white/90 mobile:text-white mobile:text-base leading-[19px] mobile:leading-[30px] tracking-[0.2px]; 
       }
       img {
-        @apply w-4 mobile:w-[21px] mt-[7px];
+        @apply flex-shrink-0 w-4 mobile:w-[21px] mt-[1px] mobile:mt-[7px];
       }
     }
     &_cta {
@@ -76,15 +79,19 @@
 
     //medium card
     &_medium {
-      @apply flex flex-col rounded-2xl px-8 py-10;
+      @apply flex flex-col rounded-2xl px-4 mobile:px-8 py-6 mobile:py-10;
       .affluent-card_eyebrow {
-        @apply bg-transparent text-grey-300/70 text-[14px] leading-[30px] font-normal p-0 mb-2;
+        @apply bg-transparent text-grey-300/70 text-[12px] mobile:text-[14px] leading-[30px] font-normal p-0 mb-2;
       }
       &-title {
-        @apply relative text-[20px] leading-[30px] text-sl-affluent-beige-200 font-normal;
+        @apply relative text-[18px] mobile:text-[20px] leading-[30px] text-sl-affluent-beige-200 font-normal;
       }
       &-desc {
-        @apply relative text-[13px] leading-[21px] font-normal text-white/70;
+        @apply relative text-[14px] leading-[21px] font-normal text-white/70;
+
+        .textctn {
+          @apply text-[14px];
+        }
       }
       .textctn {
         @apply static mobile:absolute top-0 left-0 z-[1];
@@ -106,7 +113,7 @@
       .affluent-card_cta {
         @apply mt-auto;
         .affluent-button_primary {
-          @apply text-[14px] leading-[1.2] font-medium px-6 mobile:px-4 py-[12.5] mobile:py-[11px];
+          @apply text-[14px] leading-[1.2] font-medium px-6 mobile:px-4 py-[12.5px] mobile:py-[11px];
         }
       }
     }
@@ -143,7 +150,7 @@
         @apply w-[42px] mobile:w-[64px];
       }
       &-desc {
-        @apply text-[14px] mobile:text-[18px] leading-[1.2] text-center;
+        @apply text-[14px] mobile:text-[18px] text-[#FAFAFA] leading-[1.2] text-center;
       }
     }
   }
