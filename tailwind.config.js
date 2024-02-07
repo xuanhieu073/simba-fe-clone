@@ -139,8 +139,15 @@ module.exports = {
         "singlife-white": "#F8F8F8",
         "singlife-white-100": "#F8F7F6",
         "sl-affluent": {
-          red: "#590402",
-          gray: "#E0E0E0",
+          red: {
+            DEFAULT: "#590402",
+            100: "#C50000",
+          },
+          gray: {
+            DEFAULT: "#E0E0E0",
+            100: "#E2E0E0",
+            200: "#F0F0F0",
+          },
           beige: {
             DEFAULT: "#EDDEC2",
             100: "#CAA97C",

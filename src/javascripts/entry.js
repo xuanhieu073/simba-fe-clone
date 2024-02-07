@@ -7,6 +7,8 @@ import "./affluent-header";
 import "./affluent-products-grid";
 import "./affluent-hero";
 import "./affluent-leadin-section";
+import "./affluent-contact-form";
+import "./affluent-sign-up";
 
 if (module.hot) {
   module.hot.accept(console.error);

@@ -36,9 +36,6 @@ module.exports = {
           "extract-loader",
           {
             loader: "html-loader",
-            // options: {
-            //   attrs: ["img:src", ":data-src"],
-            // },
             options: {
               sources: {
                 list: [
@@ -72,8 +69,14 @@ module.exports = {
             loader: "file-loader",
             options: {
               name: "[name].[ext]",
-              outputPath: "assets/",
-              publicPath: (url) => "./assets/" + url,
+              // outputPath: (url, resourcePath, context) => {
+              //   const relativePath = path.relative(context, resourcePath).replace("src/", "");
+              //   return `resource/${relativePath}`
+              // },
+              // publicPath: (url, resourcePath, context) => {
+              //   const relativePath = path.relative(context, resourcePath).replace("src/", "");
+              //   return `resource/${relativePath}`
+              // },
             },
           },
         ],
