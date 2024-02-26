@@ -1,3 +1,15 @@
+let digitalData = {}
+function setAffluentFormDataTrack(type, formName, formData, track) {
+  const event = `track_form_${type}`;
+  if (!digitalData.form) digitalData.form = {};
+  digitalData.form.name = formName;
+  digitalData.form = {...digitalData.form, ...formData};
+  if (track) {
+    console.log(event, 'digitalData', JSON.stringify(digitalData, null, 2));
+    // trying(() => _satellite.track(event));
+  }
+}
+
 document.addEventListener('alpine:init', () => {
   Alpine.data('affluent_contact_form', () => ({
     fields: {},
@@ -6,9 +18,25 @@ document.addEventListener('alpine:init', () => {
     successMessage: '',
     failMessage: '',
     formName: '',
-    Viewed: false,
+    touched: false,
     init(){
-      this.formName = this.$root.getAttribute('name');
+      const _this =this;
+      this.formName = [
+        document.querySelector('.affluent-contact-form_title').innerText || null,
+        this.$root.name || null,
+        this.$root.id || null,
+      ].filter(name => !!name).join(' | ')
+
+      const formControls = this.$root.querySelectorAll('.affluent-contact-form_form-control, .affluent-contact-form_submit');
+      formControls.forEach(control => {
+        control.addEventListener('click', () => {
+          if(!_this.touched) {
+            _this.touched = true;
+            setAffluentFormDataTrack('start', _this.formName, {}, true);
+          }
+        })
+      })
+
       const { successMessage, failMessage, urlSuccessAnimation, urlFailAnimation } = this.$el.dataset;
       this.successMessage = successMessage;
       this.failMessage = failMessage;
@@ -24,21 +52,11 @@ document.addEventListener('alpine:init', () => {
         }, 5000);
       })
     },
-    checkIfFormVisibleOnView() {
-      const rect = this.$root.getBoundingClientRect();
-      if(
-        !this.Viewed
-        && rect.top >= 0
-        && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
-        && rect.top != 0 && rect.bottom != 0
-      ){
-        this.Viewed = true;
-        trackPopupForm(this.formName, 'view');
-      }
-    },
-    initField(ele) {
-      const { name, type } = ele;
-      this.fields[name] = { error: false, dirty: false, message: '', type: type, el: ele };
+    initField(el) {
+      const { name, type, label } = el;
+      const { pre, primary } = el.dataset;
+      const fielddata = { error: false, dirty: false, message: '', type, label, el, primary }
+      this.fields[name] = pre ? {...fielddata, pre} : fielddata;
     },
     inputValidation($el) {
       const name = $el.name;
@@ -58,13 +76,16 @@ document.addEventListener('alpine:init', () => {
         this.fields[name].message = '';
       }
 
-      if ((data_check_validation === 'true') || value != '') {
-        if (value == '') {
+      if ((data_check_validation === 'true') || (value != '' && ele.type !== 'checkbox')) {
+        if (value == '' || ele.type === 'checkbox' && !ele.checked) {
           this.fields[name].error = true;
           this.fields[name].message = data_error_message;
         } else if (data_custom_regex != '') {
           const regex = new RegExp(data_custom_regex);
-          if (regex.test(value)) {
+          const fields_name = Object.keys(this.fields);
+          const prename = fields_name.find(fieldname => this.fields[fieldname].pre === name);
+          const predata = this.fields[prename]?.el.value || '';
+          if (regex.test(value) || (predata && predata !== '+65')) {
             this.fields[name].error = false;
             this.fields[name].message = '';
           } else {
@@ -83,26 +104,46 @@ document.addEventListener('alpine:init', () => {
         this.inputValidation(this.fields[field_name].el);
       }
       //When submit, validate and get the fields name that is error
-      const errorFields = fields_name.filter((key) => this.fields[key].error);
-      // if (errorFields.length) trackPopupFormError(this.formName, errorFields);
+      const errorFields = fields_name.reduce((acc, key) => { 
+        if (this.fields[key].error) 
+          return [...acc, {label: this.fields[key].label, message: this.fields[key].message}]
+        else 
+          return acc
+      }, []);
+      const error = {
+        numsErrors: errorFields.length,
+        fieldLabels: errorFields.map(field => field.label).join(','),
+        messages: errorFields.map(field => field.message).join(','),
+      }
+      if (errorFields.length)  setAffluentFormDataTrack('error', this.formName, {error}, true);;
 
       return !fields_name.some((key) => {
         return this.fields[key].error === true;
       });
     },
     getFormData(){
-      let data = {}
       const fields_name = Object.keys(this.fields);
-      const inputElements = this.$root.getElementsByTagName('input');
-      fields_name.forEach((fieldName) => {
-        for(const inputEle of inputElements){
-          if(inputEle.name == fieldName){
-            data[fieldName] = inputEle.value;
+      const data = fields_name.reduce((acc, fieldname) => {
+        if(this.fields[fieldname].pre){
+          return acc;
+        }
+        else {
+          const el = this.fields[fieldname].el;
+          if(el.type === "checkbox"){
+            return {...acc, [fieldname]: el.checked ? el.dataset.value || '' : ''};
+          }
+          else {
+            return {...acc, [fieldname]: el.value};
           }
         }
-      });
+      }, {});
+      for(const fieldname of fields_name) {
+        const { pre} = this.fields[fieldname];
+        if(pre){
+          data[pre] = `${this.fields[fieldname].el.value}${data[pre]}`;
+        }
+      }
       data.source = 'Web form';
-      console.log("🚀 ~ getFormData ~ data:", data)
       return data;
     },
     // Integrate reCaptchaV3
@@ -123,7 +164,6 @@ document.addEventListener('alpine:init', () => {
       }
     },
     async onSubmit(token = null){
-      console.log('onsubmit')
       const isValidate = this.onValidate();
       if(!isValidate){
         return;
@@ -153,15 +193,18 @@ document.addEventListener('alpine:init', () => {
                   };
               });
           })
+        const fieldsname = Object.keys(this.fields);
+        const aoifield = fieldsname.filter(fieldname => this.fields[fieldname].primary);
+        const areaofInterest = this.fields[aoifield]?.el.value || '';
+        setAffluentFormDataTrack('complete', this.formName, {areaofInterest}, true);
         if ((data && data.status === 400) || data.status === 500 || data.status === 403) {
           this.status = 'fail';
-          trackPopupForm(this.formName, 'submit');
         } else {
           this.status = 'success';
-          trackPopupForm(this.formName, 'submit');
         }
       }
       catch(e){
+        console.log("🚀 ~ onSubmit ~ e:", e)
         this.status = 'fail'
       }
     },
@@ -185,11 +228,12 @@ document.addEventListener('alpine:init', () => {
     },
     datafield: {
       ['x-data']() {
-        return {fieldName: '', placeholder: ''}
+        return {fieldName: '', placeholder: '', label: this.$el.querySelector('label').innerText}
       },
     },
     textfield: {
       ['x-init'](){
+        this.$el.label = this.label;
         const { name, placeholder } = this.$el;
         this.fieldName = name;
         this.placeholder = placeholder;

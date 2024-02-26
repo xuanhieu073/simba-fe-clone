@@ -61,7 +61,10 @@
       }
     }
     &_end {
-      @apply pr-4;
+      @apply mobile:pr-4;
+      .affluent-button_primary {
+        @apply px-[10px] mobile:px-[26px];
+      }
     }
     &_menu {
       grid-area: cta;
