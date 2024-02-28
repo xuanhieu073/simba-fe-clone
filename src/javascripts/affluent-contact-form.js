@@ -52,40 +52,35 @@ document.addEventListener('alpine:init', () => {
         }, 5000);
       })
     },
-    initField(el) {
-      const { name, type, label } = el;
-      const { pre, primary } = el.dataset;
-      const fielddata = { error: false, dirty: false, message: '', type, label, el, primary }
+    initField($el) {
+      const { name, type, label } = $el;
+      const { pre, primary } = $el.dataset;
+      const fielddata = { error: false, dirty: false, message: '', type, label, el: $el, primary, value: '' }
       this.fields[name] = pre ? {...fielddata, pre} : fielddata;
     },
-    inputValidation($el) {
+    inputValidation($el, value) {
       const name = $el.name;
       if (!this.fields[name].dirty) {
         this.fields[name].dirty = true;
       }
-
-      let ele = $el;
-      let value = ele.value;
-      let data_check_validation = ele.dataset.checkValidation; //ele.getAttribute('data-check-validation');
-      let data_error_message = ele.dataset.errorMessage; //ele.getAttribute('data-error-message');
-      let data_custom_regex = ele.dataset.customRegex; //ele.getAttribute('data-custom-regex');
-      let data_custom_regex_error = ele.dataset.customRegexError; //ele.getAttribute('data-custom-regex-error');
+      this.fields[name].value = value;
+      let data_check_validation = $el.dataset.checkValidation; //ele.getAttribute('data-check-validation');
+      let data_error_message = $el.dataset.errorMessage; //ele.getAttribute('data-error-message');
+      let data_custom_regex = $el.dataset.customRegex; //ele.getAttribute('data-custom-regex');
+      let data_custom_regex_error = $el.dataset.customRegexError; //ele.getAttribute('data-custom-regex-error');
 
       if ((data_check_validation == 'false') || value == '') {
         this.fields[name].error = false;
         this.fields[name].message = '';
       }
 
-      if ((data_check_validation === 'true') || (value != '' && ele.type !== 'checkbox')) {
-        if (value == '' || ele.type === 'checkbox' && !ele.checked) {
+      if ((data_check_validation === 'true') || (value != '' && $el.type !== 'checkbox')) {
+        if (value == '' || $el.type === 'checkbox' && !$el.checked) {
           this.fields[name].error = true;
           this.fields[name].message = data_error_message;
         } else if (data_custom_regex != '') {
           const regex = new RegExp(data_custom_regex);
-          const fields_name = Object.keys(this.fields);
-          const prename = fields_name.find(fieldname => this.fields[fieldname].pre === name);
-          const predata = this.fields[prename]?.el.value || '';
-          if (regex.test(value) || (predata && predata !== '+65')) {
+          if (regex.test(value)) {
             this.fields[name].error = false;
             this.fields[name].message = '';
           } else {
@@ -99,9 +94,10 @@ document.addEventListener('alpine:init', () => {
       }
     },
     onValidate() {
+      console.log("🚀 ~ getFormData ~ this.fields:", this.fields)
       const fields_name = Object.keys(this.fields);
       for(const field_name of fields_name){
-        this.inputValidation(this.fields[field_name].el);
+        this.inputValidation(this.fields[field_name].el, this.fields[field_name].value);
       }
       //When submit, validate and get the fields name that is error
       const errorFields = fields_name.reduce((acc, key) => { 
@@ -117,32 +113,20 @@ document.addEventListener('alpine:init', () => {
       }
       if (errorFields.length)  setAffluentFormDataTrack('error', this.formName, {error}, true);;
 
-      return !fields_name.some((key) => {
-        return this.fields[key].error === true;
-      });
+      return errorFields.length === 0;
     },
     getFormData(){
       const fields_name = Object.keys(this.fields);
       const data = fields_name.reduce((acc, fieldname) => {
-        if(this.fields[fieldname].pre){
-          return acc;
+        const el = this.fields[fieldname].el;
+        if(el.type === "checkbox"){
+          return {...acc, [fieldname]: el.checked ? el.dataset.value || '' : ''};
         }
         else {
-          const el = this.fields[fieldname].el;
-          if(el.type === "checkbox"){
-            return {...acc, [fieldname]: el.checked ? el.dataset.value || '' : ''};
-          }
-          else {
-            return {...acc, [fieldname]: el.value};
-          }
+          return {...acc, [fieldname]: el.value};
         }
       }, {});
-      for(const fieldname of fields_name) {
-        const { pre} = this.fields[fieldname];
-        if(pre){
-          data[pre] = `${this.fields[fieldname].el.value}${data[pre]}`;
-        }
-      }
+      console.log("🚀 ~ data ~ data:", data)
       data.source = 'Web form';
       return data;
     },
@@ -228,7 +212,7 @@ document.addEventListener('alpine:init', () => {
     },
     datafield: {
       ['x-data']() {
-        return {fieldName: '', placeholder: '', label: this.$el.querySelector('label').innerText}
+        return { value: '', fieldName: '', placeholder: '', label: this.$el.querySelector('label').innerText }
       },
     },
     textfield: {
@@ -238,15 +222,13 @@ document.addEventListener('alpine:init', () => {
         this.fieldName = name;
         this.placeholder = placeholder;
         this.initField(this.$el);
+        this.$watch('value', val => this.inputValidation(this.$el, val))
       },
       ['@focus'](){
         this.$el.placeholder = ''
       },
       ['@focusout'](){
         this.$el.placeholder = this.placeholder;
-      },
-      ['@input'](){
-        this.inputValidation(this.$el)
       },
       [':class']() {
         return this.fieldName in this.fields && this.fields[this.fieldName].error && 'error'

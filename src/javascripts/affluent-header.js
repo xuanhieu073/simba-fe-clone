@@ -1,9 +1,13 @@
 document.addEventListener("alpine:init", () => {
   Alpine.data("affluentheader", () => ({
     menuShow: false,
+    submenuid: '',
     async init() {
       const _this = this;
       const root = this.$root;
+      this.$watch('submenuid', val => {
+        this.$refs.submenu.classList.toggle('hidden', false)
+      })
       const menuLength = root.querySelectorAll('.affluent-header_menu li').length;
       if(menuLength == 0) {
         _this.$refs.menuIcon.style.setProperty('visibility', 'hidden');
@@ -44,5 +48,26 @@ document.addEventListener("alpine:init", () => {
         document.body.style.overflow = null;
       }
     },
+    screen() {
+      const breakpoint = getComputedStyle(this.$root).getPropertyValue('--breakpoint');
+      return breakpoint.toString();
+    },
+    unhovershowsubmenu() {
+      if(this.screen() === 'desktop') this.submenuid = '';
+    },
+    showsubmenu: {
+      ['@mouseover']() { 
+        if(this.screen() === 'desktop') this.submenuid = this.$el.dataset.target;
+      },
+      ['@click']() { 
+        if(this.screen() === 'mobile') this.submenuid = this.$el.dataset.target;
+      },
+    },
+    submenu: {
+      ['x-show'](){
+        return this.$el.dataset.submenuid === this.submenuid;
+      },
+      ['x-transition:enter.opacity.duration.500ms'](){}
+    }
   }));
 });
